@@ -2,11 +2,17 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import RegistrationForm from './pages/RegistrationForm'
+import LoginForm from './pages/LoginForm'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 export default function App() {
   return (
-    <div className="bg-yellow-200 min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-blue-600">Tailwind Works?</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<LoginForm />} />
+        <Route path='/register' element ={<RegistrationForm />} />
+      </Routes>
+    </Router>
   );
 }

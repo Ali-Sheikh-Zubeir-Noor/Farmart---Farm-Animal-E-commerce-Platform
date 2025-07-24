@@ -1,14 +1,19 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import { useSelector } from 'react-redux';
 
+const ProtectedRoute = ({ children, requiredRole = null }) => {
+  const { isAuthenticated, user } = useSelector(state => state.auth);
 
-export default function RoleProtectedRoute({children, allowedRoles}){
-    const token = localStorage.getItem('token');
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
 
-    if(!token){
-        return <Navigate to="/login" replace />;
-    }
-    return children;
+  if (requiredRole && user?.role !== requiredRole) {
+    return <Navigate to="/" replace />;
+  }
 
-}
+  return children;
+};
+
+export default ProtectedRoute;

@@ -12,13 +12,13 @@ import Register from './pages/Register.jsx';
 import Animals from './pages/Animals.jsx';
 import AnimalDetail from './pages/AnimalDetail.jsx';
 import Cart from './pages/Cart.jsx';
-import Checkout from './pages/Checkout.jsx';
 import Profile from './pages/Profile.jsx';
 import FarmerDashboard from './pages/FarmerDashboard.jsx';
 import AddAnimal from './pages/AddAnimal.jsx';
 import EditAnimal from './pages/EditAnimal.jsx';
-import Orders from './pages/Orders.jsx';
-import OrderDetail from './pages/OrderDetail.jsx';
+// Removed: import Orders from './pages/Orders.jsx';
+// Removed: import Checkout from './pages/Checkout.jsx';
+// Removed: import OrderDetail from './pages/OrderDetail.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Footer from './components/Footer.jsx';
 import LoadingSpinner from './components/LoadingSpinner.jsx';
@@ -51,34 +51,21 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/animals" element={<Animals />} />
               <Route path="/animals/:id" element={<AnimalDetail />} />
-              
+
               {/* Protected Routes */}
               <Route path="/cart" element={
                 <ProtectedRoute>
                   <Cart />
                 </ProtectedRoute>
               } />
-              <Route path="/checkout" element={
-                <ProtectedRoute>
-                  <Checkout />
-                </ProtectedRoute>
-              } />
+              {/* Removed checkout route */}
               <Route path="/profile" element={
                 <ProtectedRoute>
                   <Profile />
                 </ProtectedRoute>
               } />
-              <Route path="/orders" element={
-                <ProtectedRoute>
-                  <Orders />
-                </ProtectedRoute>
-              } />
-              <Route path="/orders/:id" element={
-                <ProtectedRoute>
-                  <OrderDetail />
-                </ProtectedRoute>
-              } />
-              
+              {/* Removed orders and order detail routes */}
+
               {/* Farmer Routes */}
               <Route path="/farmer/dashboard" element={
                 <ProtectedRoute requiredRole="farmer">

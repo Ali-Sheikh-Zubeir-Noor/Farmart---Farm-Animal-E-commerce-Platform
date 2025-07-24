@@ -1,4 +1,4 @@
-#!/home/ali/Desktop/projects/Farmart---Farm-Animal-E-commerce-Platform/backend/venv/bin/python3
+#!/home/ali/Desktop/projects/Farmart---Farm-Animal-E-commerce-Platform/backend/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

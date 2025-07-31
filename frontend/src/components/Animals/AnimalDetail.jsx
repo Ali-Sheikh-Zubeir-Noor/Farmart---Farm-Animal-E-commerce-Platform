@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { 
   ArrowLeft, 
   MapPin, 
-  Calendar, 
+  Calendar,
   Scale, 
   ShoppingCart, 
   Phone, 
@@ -183,7 +183,7 @@ const AnimalDetail = () => {
                 <span>{animal.age} years old</span>
               </div>
               <div className="flex items-center space-x-2 text-gray-600">
-                <Weight className="h-5 w-5" />
+                <Scale className="h-5 w-5" />
                 <span>{animal.weight} lbs</span>
               </div>
               <div className="flex items-center space-x-2 text-gray-600">

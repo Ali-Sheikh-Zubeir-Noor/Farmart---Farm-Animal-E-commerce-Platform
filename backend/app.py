@@ -21,7 +21,7 @@ app = Flask(__name__)
 
 
 # Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://username:password@localhost/farmart')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your-secret-key-change-in-production')
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=24)
@@ -277,7 +277,8 @@ def register():
        }), 201
       
    except Exception as e:
-       return jsonify({'message': 'Server error'}), 500
+    print(f"Registration Error: {e}")  # Add this line
+    return jsonify({'message': 'Server error'}), 500
 
 
 @app.route('/api/auth/login', methods=['POST'])
@@ -333,8 +334,8 @@ def upload_image():
        })
       
    except Exception as e:
-       return jsonify({'message': 'Image upload failed'}), 500
-
+        print(f"Upload error: {e}")  # Add this line to see the real issue
+        return jsonify({'message': 'Image upload failed'}), 500
 
 # Animal Routes
 @app.route('/api/animals', methods=['GET'])
@@ -795,10 +796,10 @@ def get_dashboard_stats():
                OrderItem.farmer_id == user_id
            ).join(Order).filter(Order.status == 'completed').scalar() or 0
           
-           pending_orders = db.session.query(Order).join(OrderItem).filter(
-               OrderItem.farmer_id == user_id,
-               Order.status == 'pending'
-           ).distinct().count()
+           pending_orders = db.session.query(Order.id).join(OrderItem).filter(
+                OrderItem.farmer_id == user_id,
+                Order.status == 'pending'
+            ).distinct(Order.id).count()
           
            stats = {
                'totalAnimals': total_animals,
@@ -825,7 +826,9 @@ def get_dashboard_stats():
        return jsonify(stats)
       
    except Exception as e:
-       return jsonify({'message': 'Server error'}), 500
+    import traceback
+    traceback.print_exc()  # <-- shows full error stack trace in terminal
+    return jsonify({'message': 'Server error', 'error': str(e)}), 500
 
 
 # Initialize database

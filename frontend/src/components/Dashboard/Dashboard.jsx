@@ -31,7 +31,7 @@ const Dashboard = () => {
         api.get('/dashboard/stats'),
         api.get('/orders')
       ]);
-      
+      console.log('Dashboard Stats:', statsResponse.data); 
       setStats(statsResponse.data);
       setRecentOrders(ordersResponse.data.slice(0, 5));
     } catch (error) {
